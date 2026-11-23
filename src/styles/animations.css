@@ -1,0 +1,216 @@
+/* ==========================================================================
+   BCRM Winget — 60fps Motion System (Kestrel CRM Spring Physics)
+   Spring Physics: cubic-bezier(0.22, 1, 0.36, 1)
+   ========================================================================== */
+
+:root {
+  --animate-duration: 300ms;
+  --ease-spring: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-exit: cubic-bezier(0.4, 0, 1, 1);
+}
+
+@keyframes kslFadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes kslFadeInUp {
+  from { opacity: 0; transform: translate3d(0, 12px, 0) scale(0.992); }
+  to { opacity: 1; transform: translate3d(0, 0, 0) scale(1); }
+}
+
+@keyframes kslFadeInDown {
+  from { opacity: 0; transform: translate3d(0, -10px, 0) scale(0.985); }
+  to { opacity: 1; transform: translate3d(0, 0, 0) scale(1); }
+}
+
+@keyframes kslFadeInRight {
+  from { opacity: 0; transform: translate3d(16px, 0, 0); }
+  to { opacity: 1; transform: translate3d(0, 0, 0); }
+}
+
+@keyframes kslZoomIn {
+  from { opacity: 0; transform: scale3d(0.96, 0.96, 1) translate3d(0, 6px, 0); }
+  to { opacity: 1; transform: scale3d(1, 1, 1) translate3d(0, 0, 0); }
+}
+
+@keyframes kslSlideInRight {
+  from { transform: translate3d(100%, 0, 0); opacity: 0.85; }
+  to { transform: translate3d(0, 0, 0); opacity: 1; }
+}
+
+@keyframes kslGrowBar {
+  from { transform: scaleY(0); opacity: 0.35; }
+  to { transform: scaleY(1); opacity: 1; }
+}
+
+@keyframes kslGrowX {
+  from { transform: scaleX(0); }
+  to { transform: scaleX(1); }
+}
+
+@keyframes kslSpin {
+  to { transform: rotate(360deg); }
+}
+
+.anim-enter {
+  animation: kslFadeInUp 260ms var(--ease-spring) both;
+}
+
+.anim-zoom {
+  animation: kslZoomIn 210ms var(--ease-spring) both;
+}
+
+.anim-drawer {
+  animation: kslSlideInRight 230ms var(--ease-spring) both;
+}
+
+.anim-cmd {
+  animation: kslFadeInDown 200ms var(--ease-spring) both;
+}
+
+.anim-toast {
+  animation: kslFadeInRight 210ms var(--ease-spring) both;
+}
+
+.ksl-bar-grow {
+  transform-box: fill-box;
+  transform-origin: center bottom;
+  animation: kslGrowBar 480ms var(--ease-spring) both;
+}
+
+.ksl-fill-grow {
+  transform-origin: left center;
+  animation: kslGrowX 480ms var(--ease-spring) both;
+}
+
+.spin {
+  animation: kslSpin 900ms linear infinite;
+}
+
+/* Living Sidebar Gliding Pill */
+.sidebar-scroll {
+  position: relative;
+}
+
+.nav-active-pill {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 0;
+  border-radius: var(--radius-md);
+  background: var(--bg-surface-2);
+  border: 1px solid var(--border-subtle);
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0;
+  will-change: transform, width, height;
+  transition:
+    transform 280ms var(--ease-spring),
+    width 220ms var(--ease-spring),
+    height 220ms var(--ease-spring),
+    opacity 180ms ease;
+}
+
+.sidebar .nav-item {
+  position: relative;
+  z-index: 1;
+  transition:
+    color 160ms ease,
+    background-color 160ms ease,
+    transform 160ms var(--ease-spring);
+}
+
+.sidebar .nav-item.active {
+  background: transparent;
+}
+
+.sidebar .nav-item:hover:not(.active) {
+  background: var(--bg-surface);
+}
+
+.sidebar .nav-item svg {
+  transition: transform 220ms var(--ease-spring), color 160ms ease;
+}
+
+.sidebar .nav-item:hover svg {
+  transform: scale(1.08) translateX(1px);
+  color: var(--text-primary);
+}
+
+.sidebar .nav-item .nav-label {
+  transition: transform 200ms var(--ease-spring), color 160ms ease;
+}
+
+.sidebar .nav-item:hover .nav-label {
+  transform: translateX(2px);
+}
+
+.sidebar .nav-item:active {
+  transform: scale(0.985);
+}
+
+.brand-mark {
+  transition: transform 260ms var(--ease-spring);
+}
+.brand-btn:hover .brand-mark {
+  transform: rotate(-6deg) scale(1.06);
+}
+
+.customizer-icon-box {
+  transition: transform 260ms var(--ease-spring), border-color 160ms ease;
+}
+.customizer-dock:hover .customizer-icon-box {
+  transform: rotate(12deg) scale(1.06);
+  border-color: var(--border-strong);
+}
+
+/* Tactile Surface Hover */
+.kpi-card,
+.lead-bucket-card,
+.pkg-card {
+  transition:
+    transform 200ms var(--ease-spring),
+    border-color 150ms ease,
+    background-color 150ms ease;
+}
+
+.kpi-card:hover,
+.lead-bucket-card:hover,
+.pkg-card:hover {
+  transform: translateY(-2px);
+  border-color: var(--border-strong);
+}
+
+.btn {
+  transition:
+    transform 120ms var(--ease-spring),
+    background-color 150ms ease,
+    border-color 150ms ease,
+    color 150ms ease,
+    opacity 150ms ease;
+}
+
+.btn:active:not(:disabled) {
+  transform: scale(0.97);
+}
+
+.segmented-slice {
+  transition: width 360ms var(--ease-spring) !important;
+}
+
+/* Motion Off Mode */
+[data-motion="off"] *,
+[data-motion="off"] *::before,
+[data-motion="off"] *::after {
+  animation: none !important;
+  transition: none !important;
+}
+
+[data-motion="off"] .kpi-card:hover,
+[data-motion="off"] .lead-bucket-card:hover,
+[data-motion="off"] .pkg-card:hover,
+[data-motion="off"] .btn:active:not(:disabled) {
+  transform: none !important;
+}

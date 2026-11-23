@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en" data-theme="dark" data-accent="monochrome" data-radius="default" data-density="comfortable" data-motion="full">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#09090b" />
+    <title>BCRM WinStore</title>
+    <style>
+      html, body { margin: 0; padding: 0; background: #09090b; overflow: hidden; }
+      html[data-theme="light"], html[data-theme="light"] body { background: #f6f6f7; }
+      .skip-link { position: fixed; top: -100px; left: 16px; }
+    </style>
+    <script>
+      (function () {
+        try {
+          var raw = localStorage.getItem('bcrm_winget_prefs_v1');
+          if (!raw) return;
+          var p = JSON.parse(raw);
+          var root = document.documentElement;
+          var theme = p.theme === 'system'
+            ? (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark')
+            : (p.theme === 'light' ? 'light' : 'dark');
+          root.setAttribute('data-theme', theme);
+          root.setAttribute('lang', p.language === 'vi' ? 'vi' : 'en');
+          if (p.accent) root.setAttribute('data-accent', p.accent);
+          if (p.radius) root.setAttribute('data-radius', p.radius);
+          if (p.density) root.setAttribute('data-density', p.density);
+          if (p.motion) root.setAttribute('data-motion', p.motion);
+        } catch (e) {}
+      })();
+    </script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main-content">Skip to main content</a>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

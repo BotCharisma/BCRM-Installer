@@ -1,0 +1,19 @@
+[package]
+name = "bcrm-winget"
+version = "0.1.0"
+description = "BCRM Winget — Windows & Microsoft Store Package Manager"
+authors = ["BCRM"]
+edition = "2021"
+
+[lib]
+name = "bcrm_winget_lib"
+crate-type = ["rlib"]
+
+[build-dependencies]
+tauri-build = { version = "2", features = [] }
+
+[dependencies]
+tauri = { version = "2", features = [] }
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+tokio = { version = "1", features = ["full"] }

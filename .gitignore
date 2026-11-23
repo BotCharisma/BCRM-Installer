@@ -1,0 +1,23 @@
+# Dependencies
+node_modules/
+
+# Frontend build output
+dist/
+
+# Tauri / Rust build artifacts
+src-tauri/target/
+src-tauri/gen/schemas/
+
+# Release packages
+dist-releases/
+
+# Portable runtime data
+data/
+portable.mode
+
+# Logs & OS files
+*.log
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
